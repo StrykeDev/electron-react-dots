@@ -1,13 +1,159 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  --accent-color: #2e4b62;
+  --secondary-color: rgb(128, 128, 128);
+
+  --bg-light: rgb(50, 50, 55);
+  --bg-normal: rgb(30, 30, 35);
+  --bg-dark: rgb(20, 20, 25);
+
+  --text-light: rgb(255, 255, 255);
+  --text-normal: rgb(235, 235, 235);
+  --text-dark: rgb(150, 150, 150);
+
+  --btn-light: rgb(65, 65, 70);
+  --btn-normal: rgb(45, 45, 50);
+  --btn-dark: rgb(35, 35, 40);
+
+  --border-radius: 4em;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  outline: none;
+}
+
+*::selection {
+  background-color: var(--accent-color);
+}
+
+body {
+  margin: 0;
+  font-family: Roboto;
+  color: var(--text-normal);
+  font-size: 1rem;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-light);
+}
+
+/* Text */
+h1,
+h2,
+h3 {
+  margin: 0.25em 0;
+  color: var(--text-light);
+  font-weight: 100;
+}
+
+h3,
+h4 {
+  color: var(--text-light);
+  font-weight: 300;
+}
+
+h5,
+h6 {
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-accent {
+  color: var(--accent-color);
+}
+
+.text-shadow {
+  text-shadow: 0.1rem 0.1rem 0.4rem #000;
+}
+
+/* Links and buttons */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color ease 0.2s;
+  cursor: pointer;
+}
+
+a:hover,
+a:focus {
+  color: var(--text-light);
+}
+
+a:active {
+  color: var(--text-dark);
+}
+
+.btn {
+  width: 8em;
+  padding: 0.5em 1em;
+  margin: 0.25em;
+  border-radius: var(--border-radius);
+  border: none;
+  background-color: var(--btn-normal);
+  color: var(--text-normal);
+  font-size: inherit;
+  font-family: inherit;
+  cursor: pointer;
+  transition: color ease 0.2s, background-color ease 0.2s;
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: var(--btn-light);
+  color: var(--text-light);
+}
+
+.btn:active {
+  background-color: var(--btn-dark);
+  color: var(--text-dark);
+}
+
+.btn:disabled {
+  background-color: var(--btn-dark);
+  color: var(--text-dark);
+  cursor: not-allowed;
+}
+
+/* Inputs */
+input {
+  font-size: inherit;
+  color: inherit;
+  border: none;
+  margin: 0.25em;
+}
+
+input[type='text'],
+input[type='search'] {
+  background-color: var(--bg-dark);
+  border-radius: var(--border-radius);
+  padding: 0.25em 0.75em;
+  width: 100%;
+}
+
+/* Utilities */
+.hide {
+  visibility: hidden !important;
+}
+
+.collapse {
+  display: none;
+  visibility: collapse !important;
+}
+
+.unstyled-list {
+  list-style: none;
+}
+
+.drop-shadow {
+  box-shadow: 0.1rem 0.1rem 0.4em #000;
 }
