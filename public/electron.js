@@ -4,9 +4,9 @@ const path = require("path");
 
 const devTools = false;
 
-const width = 600;
-const height = 800;
-const screenPadding = 50;
+const width = 400;
+const height = 600;
+const screenPadding = 100;
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -31,8 +31,8 @@ app.whenReady().then(() => {
     frame: false,
     setMenu: null,
     hasShadow: false,
-    transparent: false,
-    opacity: 0.75,
+    transparent: true,
+    opacity: 1,
     webPreferences: {
       nodeIntegration: true,
     },
@@ -49,6 +49,11 @@ app.whenReady().then(() => {
   if (isDev && devTools) {
     win.webContents.openDevTools({ mode: "detach" });
   }
+
+  win.webContents.on('new-window', (event, url) => {
+    event.preventDefault();
+    require('electron').shell.openExternal(url);
+  })
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common

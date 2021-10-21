@@ -1,0 +1,53 @@
+#dots-container {
+  --dot-width: 25em;
+  width: var(--dot-width);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.dot {
+  --dot-size: 2.25em;
+  background-color: var(--bg-normal);
+  border-radius: var(--dot-size);
+  min-width: var(--dot-size);
+  width: var(--dot-size);
+  height: var(--dot-size);
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: width ease 0.5s, height ease 0.5s;
+}
+
+.dot .dot-content {
+  display: none;
+  margin-left: 0.25em;
+  width: 100%;
+}
+
+.dot-open-tall {
+  width: var(--dot-width) !important;
+  height: calc(var(--dot-width) * 2);
+}
+
+.dot-open-wide {
+  width: var(--dot-width) !important;
+}
+
+.dot-open-tall,
+.dot-open-wide {
+  justify-content: flex-start;
+  padding: 0 0.75em;
+}
+
+.dot-open-tall .dot-content,
+.dot-open-wide .dot-content {
+  display: inline;
+}
+
+.dot form {
+  flex-grow: 1;
+  width: 100%;
+}
