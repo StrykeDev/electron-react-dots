@@ -2,6 +2,7 @@ import React from 'react';
 
 import Dot from './Component/Dot';
 import SearchComponent from './Component/SearchComponent';
+import TimerComponent from './Component/TimerComponent';
 
 import { faGoogle, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
@@ -9,6 +10,25 @@ import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
 import './dots-style.css';
 
 function DotContainer(): React.ReactElement {
+  const actions = [
+    {
+      name: 'Shutdown',
+      action: 'shutdown',
+    },
+    {
+      name: 'Reboot',
+      action: 'reboot',
+    },
+    {
+      name: 'Sleep',
+      action: 'sleep',
+    },
+    {
+      name: 'Alarm',
+      action: 'alarm',
+    },
+  ];
+
   return (
     <div id="dots-container">
       <Dot icon={faGoogle}>
@@ -17,9 +37,9 @@ function DotContainer(): React.ReactElement {
       <Dot icon={faYoutube}>
         <SearchComponent provider="youtube" />
       </Dot>
-      <Dot />
+      <Dot tall></Dot>
       <Dot icon={faPowerOff}>
-        <>Powering off...</>
+        <TimerComponent actions={actions} />
       </Dot>
     </div>
   );

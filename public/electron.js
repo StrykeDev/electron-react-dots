@@ -1,6 +1,7 @@
 const { app, BrowserWindow } = require("electron");
 const isDev = require("electron-is-dev");
 const path = require("path");
+const machine = require('electron-shutdown-command');
 
 const devTools = false;
 
@@ -50,9 +51,48 @@ app.whenReady().then(() => {
     win.webContents.openDevTools({ mode: "detach" });
   }
 
+  // Handle links and actions
   win.webContents.on('new-window', (event, url) => {
     event.preventDefault();
-    require('electron').shell.openExternal(url);
+    const [type, action] = url.split(':')
+
+    switch (type) {
+      case 'action':
+        switch (action) {
+          case 'shutdown':
+            machine.shutdown({
+              force: true,
+              sudo: true,
+              debug: true,
+              timerseconds: 5,
+            })
+            break;
+          case 'reboot':
+            machine.reboot({
+              force: true,
+              sudo: true,
+              debug: true,
+              timerseconds: 5,
+            })
+            break;
+          case 'sleep':
+            machine.hibernate({
+              force: true,
+              sudo: true,
+              debug: true,
+              timerseconds: 5,
+            })
+            break;
+
+          default:
+            throw new Error(`Invalid action: ${action}`);
+        }
+        break;
+
+      default:
+        require('electron').shell.openExternal(url);
+        break;
+    }
   })
 });
 
