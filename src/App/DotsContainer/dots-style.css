@@ -17,49 +17,56 @@
 .dot {
   margin: 0.1em;
   background-color: var(--bg-normal);
-  border-radius: var(--dot-size);
+  border-radius: calc(var(--dot-size) / 2);
   min-width: var(--dot-size);
-  width: var(--dot-size);
+  width: var(--dot-container-width);
+  max-width: var(--dot-size);
+  min-height: var(--dot-size);
   height: var(--dot-size);
   overflow: hidden;
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
-  white-space: nowrap;
-  transition: width var(--transition-normal), height var(--transition-normal);
+  transition: max-width var(--transition-normal);
 }
 
 .dot .dot-btn {
-  margin: 0.05em;
-  padding: calc(var(--dot-size) / 4);
+  min-width: var(--dot-size);
+  width: var(--dot-size);
+  min-height: var(--dot-size);
+  height: var(--dot-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .dot .dot-content {
   background-color: var(--bg-dark);
-  border-radius: var(--dot-size);
+  border-radius: calc(var(--dot-size) / 2);
   box-sizing: border-box;
   border: solid var(--bg-normal) 0.25em;
-  display: none;
   height: 100%;
-  flex-grow: 1;
-  overflow: hidden;
-  align-items: center;
-  padding: 0 0.5em;
-}
-
-.dot .dot-content .input {
-  margin: 0 -0.5em;
-}
-
-.dot-open-tall {
-  width: var(--dot-container-width);
-  height: calc(var(--dot-container-width) * 1.25);
-}
-
-.dot-open-wide {
-  width: var(--dot-container-width);
-}
-
-.dot-open-tall .dot-content,
-.dot-open-wide .dot-content {
+  width: 100%;
   display: flex;
+  flex-wrap: nowrap;
+  flex-grow: 1;
+  align-items: center;
+  padding: 0.5em 0.5em;
+}
+
+.dot-tall {
+  height: 100%;
+  max-height: var(--dot-size);
+  flex-direction: column-reverse;
+  transition: all var(--transition-normal);
+}
+
+.dot-tall .dot-content {
+  white-space: normal;
+  flex-wrap: wrap;
+}
+
+.dot-expanded {
+  max-width: 100%;
+  max-height: 500px;
 }

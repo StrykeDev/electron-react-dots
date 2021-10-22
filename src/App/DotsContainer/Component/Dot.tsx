@@ -4,18 +4,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDotCircle } from '@fortawesome/free-solid-svg-icons';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
-function Dot({ icon, children, isTall }: IProps): React.ReactElement {
+function Dot({ icon, children, tall }: IProps): React.ReactElement {
   const [expanded, setExpanded] = useState(false);
 
   function ToggleSize(): void {
     setExpanded(!expanded);
   }
 
-  const className = isTall ? 'dot-open-tall' : 'dot-open-wide';
+  const dotClassName = tall ? 'dot dot-tall' : 'dot dot-wide';
   return (
-    <div className={expanded ? 'dot ' + className : 'dot'} onClick={ToggleSize}>
-      <FontAwesomeIcon icon={icon} />
-      <span className="dot-content">{children}</span>
+    <div className={expanded ? dotClassName + ' dot-expanded' : dotClassName}>
+      <div className="dot-btn" onClick={ToggleSize}>
+        <FontAwesomeIcon icon={icon} />
+      </div>
+      <div className="dot-content">{children}</div>
     </div>
   );
 }
@@ -23,13 +25,13 @@ function Dot({ icon, children, isTall }: IProps): React.ReactElement {
 interface IProps {
   icon: IconProp;
   children: React.ReactElement;
-  isTall?: boolean;
+  tall?: boolean;
 }
 
 Dot.defaultProps = {
   icon: faDotCircle,
-  children: <p>Nothing here</p>,
-  isTall: false,
+  children: <>Nothing here</>,
+  tall: false,
 };
 
 export default Dot;
