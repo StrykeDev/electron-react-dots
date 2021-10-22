@@ -52,13 +52,15 @@ function SearchComponent({ provider }: IProps): React.ReactElement {
           open(searchEngine() + searchQuery, '_blank');
           break;
       }
+      setSearchQuery('');
     }
   }
 
   return (
-    <form onSubmit={Search}>
+    <form onSubmit={Search} className="form">
       <input
-        type="search"
+        className="input"
+        type="text"
         maxLength={32}
         placeholder={placeholder()}
         value={searchQuery}

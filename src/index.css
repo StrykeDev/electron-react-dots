@@ -14,7 +14,10 @@
   --btn-normal: rgb(45, 45, 50);
   --btn-dark: rgb(35, 35, 40);
 
-  --border-radius: 4em;
+  --border-radius: 2em;
+  --transition-quick: ease 0.2s;
+  --transition-normal: ease 0.5s;
+  --transition-slow: ease 0.8s;
 }
 
 * {
@@ -23,6 +26,7 @@
 
 *::selection {
   background-color: var(--accent-color);
+  color: var(--text-light);
 }
 
 body {
@@ -76,11 +80,11 @@ h6 {
   text-shadow: 0.1rem 0.1rem 0.4rem #000;
 }
 
-/* Links and buttons */
+/* Inputs */
 a {
   color: inherit;
   text-decoration: none;
-  transition: color ease 0.2s;
+  transition: color var(--transition-quick);
   cursor: pointer;
 }
 
@@ -93,7 +97,7 @@ a:active {
   color: var(--text-dark);
 }
 
-.btn {
+/* .btn {
   width: 8em;
   padding: 0.5em 1em;
   margin: 0.25em;
@@ -104,8 +108,9 @@ a:active {
   font-size: inherit;
   font-family: inherit;
   cursor: pointer;
-  transition: color ease 0.2s, background-color ease 0.2s;
-}
+  transition: color var(--transition-quick),
+    background-color var(--transition-quick);
+} 
 
 .btn:hover,
 .btn:focus {
@@ -122,22 +127,59 @@ a:active {
   background-color: var(--btn-dark);
   color: var(--text-dark);
   cursor: not-allowed;
+}*/
+
+.form {
+  display: flex;
+  width: 100%;
+  flex-grow: 1;
+  margin: 0;
+  padding: 0;
 }
 
-/* Inputs */
-input {
+.input {
   font-size: inherit;
   color: inherit;
   border: none;
   margin: 0.25em;
-}
-
-input[type='text'],
-input[type='search'] {
   background-color: var(--bg-dark);
   border-radius: var(--border-radius);
   padding: 0.25em 0.75em;
   width: 100%;
+}
+
+.input-group {
+  background-color: var(--bg-dark);
+  border-radius: var(--border-radius);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  margin: 0.25em;
+  padding: 0.25em 0.75em;
+  width: 92%;
+}
+
+.input-group:disabled {
+  color: var(--text-dark);
+}
+
+.input-group input,
+.input-group select {
+  font-size: inherit;
+  color: inherit;
+  border: none;
+  background-color: transparent;
+  text-align: center;
+  flex-grow: 1;
+  background-color: var(--bg-dark);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 /* Utilities */
