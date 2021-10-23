@@ -131,6 +131,7 @@ function TimerDot({ action }: IProps): React.ReactElement {
             onChange={(event) => setSelected(event.currentTarget.value)}
             placeholder="Action"
           >
+            <option value="">Select</option>
             {GetOptions().map(
               (Option): React.ReactElement => (
                 <option key={Option.action} value={Option.action}>
