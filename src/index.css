@@ -15,8 +15,8 @@
    --bg-normal: #1e1e23;
    --bg-dark: #141419;
    --text-light: #ffffff;
-   --text-normal: #ebebeb;
-   --text-dark: #969696;
+   --text-normal: #c0c0c0;
+   --text-dark: #707070;
    --btn-light: #414146;
    --btn-normal: #2d2d32;
    --btn-dark: #232328;
@@ -75,6 +75,10 @@ h6 {
    text-shadow: 0.1rem 0.1rem 0.4rem #000000;
 }
 
+.text-muted {
+   color: var(--text-dark);
+}
+
 /* Inputs */
 a {
    color: inherit;
@@ -92,37 +96,38 @@ a:active {
    color: var(--text-dark);
 }
 
-/* .btn {
-  width: 8em;
-  padding: 0.5em 1em;
-  margin: 0.25em;
-  border-radius: var(--border-radius);
-  border: none;
-  background-color: var(--btn-normal);
-  color: var(--text-normal);
-  font-size: inherit;
-  font-family: inherit;
-  cursor: pointer;
-  transition: color var(--transition-quick),
-    background-color var(--transition-quick);
+.btn {
+   width: 8em;
+   margin: 0.25em;
+   padding: 0.5em 1em;
+   border: none;
+   border-radius: var(--border-radius);
+   background-color: var(--btn-normal);
+   color: var(--text-normal);
+   font-size: inherit;
+   font-family: inherit;
+   cursor: pointer;
+   transition:
+ color var(--transition-quick),
+      background-color var(--transition-quick);
 }
 
 .btn:hover,
 .btn:focus {
-  background-color: var(--btn-light);
-  color: var(--text-light);
+   background-color: var(--btn-light);
+   color: var(--text-light);
 }
 
 .btn:active {
-  background-color: var(--btn-dark);
-  color: var(--text-dark);
+   background-color: var(--btn-dark);
+   color: var(--text-dark);
 }
 
 .btn:disabled {
-  background-color: var(--btn-dark);
-  color: var(--text-dark);
-  cursor: not-allowed;
-} */
+   background-color: var(--btn-dark);
+   color: var(--text-dark);
+   cursor: not-allowed;
+}
 
 .form {
    display: flex;

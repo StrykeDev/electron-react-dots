@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <script>
+         // TODO: tell the app to close this window
+      </script>
+   </head>
+   <body>
+      <div id="root">
+         <h1>Authenticating...</h1>
+         <hr />
+         <code id="token"></code>
+         <script>
+            const token = document.getElementById('token');
+            const params = new URLSearchParams(window.location.hash);
+            token.innerText = params.get('#access_token');
+            window.navigator.clipboard.writeText(params.get('#access_token'));
+         </script>
+      </div>
+   </body>
+</html>
