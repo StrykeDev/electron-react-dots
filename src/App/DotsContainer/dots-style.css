@@ -1,69 +1,70 @@
 #dots-container {
    --dot-container-width: 25em;
    --dot-size: 2.5em;
-   width: var(--dot-container-width);
+
    display: flex;
    align-items: flex-end;
    justify-content: space-between;
-   opacity: 0.8;
+   width: var(--dot-container-width);
+   opacity: 80%;
    transition: opacity var(--transition-quick);
 }
 
 #dots-container:hover,
 #dots-container:focus {
-   opacity: 1;
+   opacity: 100%;
 }
 
 .dot {
-   margin: 0.1em;
-   background-color: var(--bg-normal);
-   border-radius: calc(var(--dot-size) / 2);
-   min-width: var(--dot-size);
-   width: var(--dot-container-width);
-   max-width: var(--dot-size);
-   min-height: var(--dot-size);
-   height: var(--dot-size);
-   overflow: hidden;
    display: flex;
    flex-wrap: nowrap;
    align-items: center;
+   overflow: hidden;
+   width: var(--dot-container-width);
+   min-width: var(--dot-size);
+   max-width: var(--dot-size);
+   height: var(--dot-size);
+   min-height: var(--dot-size);
+   margin: 0.1em;
+   border-radius: calc(var(--dot-size) / 2);
+   background-color: var(--bg-normal);
    transition: max-width var(--transition-normal);
 }
 
 .dot .dot-btn {
-   min-width: var(--dot-size);
-   width: var(--dot-size);
-   min-height: var(--dot-size);
-   height: var(--dot-size);
    display: flex;
    align-items: center;
    justify-content: center;
+   width: var(--dot-size);
+   min-width: var(--dot-size);
+   height: var(--dot-size);
+   min-height: var(--dot-size);
 }
 
 .dot .dot-content {
-   background-color: var(--bg-dark);
-   border-radius: calc(var(--dot-size) / 2);
-   box-sizing: border-box;
-   border: solid var(--bg-normal) 0.25em;
-   height: 100%;
-   width: 100%;
    display: flex;
-   flex-wrap: nowrap;
    flex-grow: 1;
+   flex-wrap: nowrap;
    align-items: center;
-   padding: 0.5em 0.5em;
+   box-sizing: border-box;
+   width: 100%;
+   height: 100%;
+   padding: 0.5em;
+   border: solid var(--bg-normal) 0.25em;
+   border-radius: calc(var(--dot-size) / 2);
+   background-color: var(--bg-dark);
 }
 
 .dot-tall {
+   flex-direction: column-reverse;
    height: 100%;
    max-height: var(--dot-size);
-   flex-direction: column-reverse;
    transition: all var(--transition-normal);
 }
 
 .dot-tall .dot-content {
-   white-space: normal;
    flex-wrap: wrap;
+   white-space: normal;
 }
 
 .dot-extended {
