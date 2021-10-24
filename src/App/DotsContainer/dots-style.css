@@ -1,72 +1,72 @@
 #dots-container {
-  --dot-container-width: 25em;
-  --dot-size: 2.5em;
-  width: var(--dot-container-width);
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  opacity: 0.8;
-  transition: opacity var(--transition-quick);
+   --dot-container-width: 25em;
+   --dot-size: 2.5em;
+   width: var(--dot-container-width);
+   display: flex;
+   align-items: flex-end;
+   justify-content: space-between;
+   opacity: 0.8;
+   transition: opacity var(--transition-quick);
 }
 
 #dots-container:hover,
 #dots-container:focus {
-  opacity: 1;
+   opacity: 1;
 }
 
 .dot {
-  margin: 0.1em;
-  background-color: var(--bg-normal);
-  border-radius: calc(var(--dot-size) / 2);
-  min-width: var(--dot-size);
-  width: var(--dot-container-width);
-  max-width: var(--dot-size);
-  min-height: var(--dot-size);
-  height: var(--dot-size);
-  overflow: hidden;
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-  transition: max-width var(--transition-normal);
+   margin: 0.1em;
+   background-color: var(--bg-normal);
+   border-radius: calc(var(--dot-size) / 2);
+   min-width: var(--dot-size);
+   width: var(--dot-container-width);
+   max-width: var(--dot-size);
+   min-height: var(--dot-size);
+   height: var(--dot-size);
+   overflow: hidden;
+   display: flex;
+   flex-wrap: nowrap;
+   align-items: center;
+   transition: max-width var(--transition-normal);
 }
 
 .dot .dot-btn {
-  min-width: var(--dot-size);
-  width: var(--dot-size);
-  min-height: var(--dot-size);
-  height: var(--dot-size);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+   min-width: var(--dot-size);
+   width: var(--dot-size);
+   min-height: var(--dot-size);
+   height: var(--dot-size);
+   display: flex;
+   align-items: center;
+   justify-content: center;
 }
 
 .dot .dot-content {
-  background-color: var(--bg-dark);
-  border-radius: calc(var(--dot-size) / 2);
-  box-sizing: border-box;
-  border: solid var(--bg-normal) 0.25em;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-wrap: nowrap;
-  flex-grow: 1;
-  align-items: center;
-  padding: 0.5em 0.5em;
+   background-color: var(--bg-dark);
+   border-radius: calc(var(--dot-size) / 2);
+   box-sizing: border-box;
+   border: solid var(--bg-normal) 0.25em;
+   height: 100%;
+   width: 100%;
+   display: flex;
+   flex-wrap: nowrap;
+   flex-grow: 1;
+   align-items: center;
+   padding: 0.5em 0.5em;
 }
 
 .dot-tall {
-  height: 100%;
-  max-height: var(--dot-size);
-  flex-direction: column-reverse;
-  transition: all var(--transition-normal);
+   height: 100%;
+   max-height: var(--dot-size);
+   flex-direction: column-reverse;
+   transition: all var(--transition-normal);
 }
 
 .dot-tall .dot-content {
-  white-space: normal;
-  flex-wrap: wrap;
+   white-space: normal;
+   flex-wrap: wrap;
 }
 
-.dot-expanded {
-  max-width: 100%;
-  max-height: 500px;
+.dot-extended {
+   max-width: 100%;
+   max-height: 500px;
 }
