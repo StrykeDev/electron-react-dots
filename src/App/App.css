@@ -1,7 +1,7 @@
 #app {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
+   display: flex;
+   align-items: flex-end;
+   justify-content: flex-end;
+   width: 100vw;
+   height: 100vh;
 }
