@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import Dot from './Dot';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faBell, faPowerOff } from '@fortawesome/free-solid-svg-icons';
-import Dot from './Dot';
-
-const INPUT_NUMBER_STYLE = { width: '1.5em' };
 
 function TimerDot({ action }: IProps): React.ReactElement {
    const [hour, setHour] = useState(0);
@@ -92,15 +90,13 @@ function TimerDot({ action }: IProps): React.ReactElement {
    }, [isCounting, sec]);
 
    return (
-      <Dot icon={getIcon()}>
+      <Dot icon={getIcon()} size="wide">
          <form
             onClick={() => setIsCounting(false)}
             onSubmit={(event) => startStopTimer(event)}
-            className="form"
          >
-            <fieldset disabled={isCounting} className="input-group">
+            <fieldset disabled={isCounting}>
                <input
-                  style={INPUT_NUMBER_STYLE}
                   type="number"
                   min={0}
                   max={99}
@@ -112,7 +108,6 @@ function TimerDot({ action }: IProps): React.ReactElement {
                />
                :
                <input
-                  style={INPUT_NUMBER_STYLE}
                   type="number"
                   min={0}
                   max={60}
@@ -124,7 +119,6 @@ function TimerDot({ action }: IProps): React.ReactElement {
                />
                :
                <input
-                  style={INPUT_NUMBER_STYLE}
                   type="number"
                   width={1000}
                   min={0}

@@ -1,11 +1,10 @@
 import React from 'react';
-import DotsContainer from './DotsContainer';
-import './App.css';
+import Dots from './components/Dots';
 
 function App(): React.ReactElement {
    return (
-      <div id="app">
-         <DotsContainer />
+      <div id="app" className="app">
+         <Dots />
       </div>
    );
 }

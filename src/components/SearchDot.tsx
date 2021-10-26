@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Dot from './Dot';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -6,7 +7,6 @@ import {
    faWikipediaW,
    faYoutube,
 } from '@fortawesome/free-brands-svg-icons';
-import Dot from './Dot';
 
 const PLACEHOLDERS = {
    generic: 'What are we searching?',
@@ -15,7 +15,7 @@ const PLACEHOLDERS = {
    research: 'What are we researching?',
 };
 
-function SearchDot({ engine }: IProps): React.ReactElement {
+function SearchDot({ engine }: ISearch): React.ReactElement {
    const [searchQuery, setSearchQuery] = useState('');
 
    function getIcon(): IconProp {
@@ -57,7 +57,7 @@ function SearchDot({ engine }: IProps): React.ReactElement {
       }
    }
 
-   function doSearch(event: React.FormEvent<HTMLFormElement>): void {
+   function search(event: React.FormEvent<HTMLFormElement>): void {
       event.preventDefault();
 
       if (searchQuery) {
@@ -67,10 +67,9 @@ function SearchDot({ engine }: IProps): React.ReactElement {
    }
 
    return (
-      <Dot icon={getIcon()}>
-         <form onSubmit={doSearch} className="form">
+      <Dot icon={getIcon()} size="wide">
+         <form onSubmit={search}>
             <input
-               className="input"
                type="text"
                maxLength={32}
                placeholder={getPlaceholder()}
@@ -83,7 +82,7 @@ function SearchDot({ engine }: IProps): React.ReactElement {
    );
 }
 
-interface IProps {
+interface ISearch {
    engine: 'google' | 'duck' | 'bing' | 'youtube' | 'wiki';
 }
 
