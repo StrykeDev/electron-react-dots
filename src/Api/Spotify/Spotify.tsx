@@ -3,7 +3,7 @@ import SpotifyWebApi from 'spotify-web-api-node';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpotify } from '@fortawesome/free-brands-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import './spotify-style.css';
+import './Spotify.css';
 
 const CLIENT_ID = '8e80fbf104a44c3492432f5da2d5258a';
 const REDIRECT_URI = 'http://localhost:3000/auth.html';
@@ -129,7 +129,7 @@ function Spotify(): React.ReactElement {
                   value="Connect"
                />
                <input
-                  className="btn text-center"
+                  className="text-center"
                   type="text"
                   name="token"
                   placeholder="Token"

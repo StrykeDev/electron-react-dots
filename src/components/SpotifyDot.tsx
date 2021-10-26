@@ -1,11 +1,11 @@
 import React from 'react';
-import Spotify from '../../Api/Spotify';
-import { faSpotify } from '@fortawesome/free-brands-svg-icons';
+import Spotify from '../api/Spotify';
 import Dot from './Dot';
+import { faSpotify } from '@fortawesome/free-brands-svg-icons';
 
 function SpotifyDot(): React.ReactElement {
    return (
-      <Dot icon={faSpotify} tall>
+      <Dot icon={faSpotify} size="full">
          <Spotify />
       </Dot>
    );
