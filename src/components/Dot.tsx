@@ -1,39 +1,129 @@
 import React, { useState } from 'react';
+import SearchDot, { EEngine } from './SearchDot';
+import TimerDot, { EFunctions } from './TimerDot';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { faDotCircle } from '@fortawesome/free-solid-svg-icons';
+import {
+   faClock,
+   faDotCircle,
+   faSearch,
+} from '@fortawesome/free-solid-svg-icons';
 
-interface IDot {
-   icon: IconProp;
-   size?: 'wide' | 'tall' | 'full';
-   children?: React.ReactElement;
+export enum EDotType {
+   Dot,
+   Search,
+   Timer,
 }
 
-Dot.defaultProps = {
-   icon: faDotCircle,
-   size: '',
-   children: '',
-};
+export enum EDotSize {
+   Dot,
+   Wide,
+   Tall,
+   Full,
+}
 
-function Dot({ icon, size, children }: IDot): React.ReactElement {
-   const [isExtended, setIsExtended] = useState(false);
+export interface IDotFunctionProps {
+   onExtend?: () => void;
+   onCollapse?: () => void;
+   onBlock?: () => void;
+}
 
-   function extend() {
-      setIsExtended(true);
+interface IDotProps {
+   id: string;
+   type: EDotType;
+   extended?: boolean;
+   onExtend: (id: string) => void;
+   onCollapse: (id: string) => void;
+   onBlock: (id: string) => void;
+}
+
+function Dot({
+   id,
+   type,
+   extended,
+   onExtend,
+   onCollapse,
+   onBlock,
+}: IDotProps): React.ReactElement {
+   const [dotType] = useState(type);
+
+   function extend(): void {
+      if (!extended) {
+         onExtend(id);
+         setTimeout(collapse, 5000);
+      }
    }
 
-   function collapse() {
-      setIsExtended(false);
+   function collapse(): void {
+      if (extended) {
+         onCollapse(id);
+      }
+   }
+
+   function block() {
+      onBlock(id);
+   }
+
+   function getSize(): string {
+      switch (dotType) {
+         case EDotType.Dot:
+            return '';
+         case EDotType.Search:
+         case EDotType.Timer:
+            return 'wide';
+      }
+   }
+
+   function getIcon(): IconProp {
+      switch (dotType) {
+         case EDotType.Dot:
+            return faDotCircle;
+         case EDotType.Search:
+            return faSearch;
+         case EDotType.Timer:
+            return faClock;
+      }
+   }
+
+   function getComponent(): React.ReactElement {
+      switch (type) {
+         case EDotType.Dot:
+            return <></>;
+         default:
+         case EDotType.Search:
+            return (
+               <SearchDot
+                  engine={EEngine.google}
+                  onCollapse={collapse}
+                  onBlock={block}
+               />
+            );
+         case EDotType.Timer:
+            return (
+               <TimerDot
+                  type={EFunctions.all}
+                  onExtend={extend}
+                  onBlock={block}
+               />
+            );
+      }
    }
 
    return (
-      <div className={['dot', size, isExtended ? 'extended' : ''].join(' ')}>
-         <div className="dot-btn" onClick={isExtended ? collapse : extend}>
-            <FontAwesomeIcon icon={icon} />
+      <div className={['dot', getSize(), extended ? 'extended' : ''].join(' ')}>
+         <div
+            className="dot-btn"
+            onClick={() => (extended ? collapse() : extend())}
+         >
+            <FontAwesomeIcon icon={getIcon()} />
          </div>
-         {children ? <div className="dot-content">{children}</div> : ''}
+         <div className="dot-content">{getComponent()}</div>
       </div>
    );
 }
+
+Dot.defaultProps = {
+   extended: false,
+};
 
 export default Dot;

@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
-import Dot from './Dot';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import {
-   faGoogle,
-   faWikipediaW,
-   faYoutube,
-} from '@fortawesome/free-brands-svg-icons';
+import { IDotFunctionProps } from './Dot';
+
+export enum EEngine {
+   google,
+   duck,
+   bing,
+   youtube,
+   wiki,
+}
+
+export interface ISearchProps extends IDotFunctionProps {
+   engine: EEngine;
+}
 
 const PLACEHOLDERS = {
    generic: 'What are we searching?',
@@ -15,27 +20,13 @@ const PLACEHOLDERS = {
    research: 'What are we researching?',
 };
 
-function SearchDot({ engine }: ISearch): React.ReactElement {
+function SearchDot({ engine }: ISearchProps): React.ReactElement {
    const [searchQuery, setSearchQuery] = useState('');
-
-   function getIcon(): IconProp {
-      switch (engine) {
-         case 'google':
-            return faGoogle;
-         case 'youtube':
-            return faYoutube;
-         case 'wiki':
-            return faWikipediaW;
-         default:
-            return faSearch;
-      }
-   }
-
    function getPlaceholder(): string {
       switch (engine) {
-         case 'youtube':
+         case EEngine.youtube:
             return PLACEHOLDERS.video;
-         case 'wiki':
+         case EEngine.wiki:
             return PLACEHOLDERS.research;
          default:
             return PLACEHOLDERS.generic;
@@ -44,20 +35,20 @@ function SearchDot({ engine }: ISearch): React.ReactElement {
 
    function getUrl(): string {
       switch (engine) {
-         case 'google':
+         case EEngine.google:
             return 'https://www.google.com/search?q=';
-         case 'duck':
+         case EEngine.duck:
             return 'https://duckduckgo.com/?q=';
-         case 'bing':
+         case EEngine.bing:
             return 'https://www.bing.com/search?q=';
-         case 'youtube':
+         case EEngine.youtube:
             return 'https://www.youtube.com/results?search_query=';
-         case 'wiki':
+         case EEngine.wiki:
             return 'https://en.wikipedia.org/w/index.php?search=';
       }
    }
 
-   function search(event: React.FormEvent<HTMLFormElement>): void {
+   function search(event: React.FormEvent): void {
       event.preventDefault();
 
       if (searchQuery) {
@@ -67,23 +58,17 @@ function SearchDot({ engine }: ISearch): React.ReactElement {
    }
 
    return (
-      <Dot icon={getIcon()} size="wide">
-         <form onSubmit={search}>
-            <input
-               type="text"
-               maxLength={32}
-               placeholder={getPlaceholder()}
-               value={searchQuery}
-               onChange={(event) => setSearchQuery(event.currentTarget.value)}
-            />
-            <input type="submit" hidden={true} />
-         </form>
-      </Dot>
+      <form onSubmit={search}>
+         <input
+            type="text"
+            maxLength={32}
+            placeholder={getPlaceholder()}
+            value={searchQuery}
+            onChange={(event) => setSearchQuery(event.currentTarget.value)}
+         />
+         <input type="submit" hidden={true} />
+      </form>
    );
-}
-
-interface ISearch {
-   engine: 'google' | 'duck' | 'bing' | 'youtube' | 'wiki';
 }
 
 export default SearchDot;
