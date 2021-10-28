@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import Dot, { EDotType } from '../Dot';
+import Dot, { EDotType, EDotVarient } from '../Dot';
 import './Dots.css';
 
 function Dots(): React.ReactElement {
    const [dots] = useState([
       {
          type: EDotType.Search,
+         varient: EDotVarient.Google,
       },
       {
          type: EDotType.Dot,
@@ -50,6 +51,7 @@ function Dots(): React.ReactElement {
                key: key,
                id: key,
                type: dot.type,
+               varient: dot.varient,
                extended: key === extendedDot,
                onExtend: handleExtend,
                onCollapse: handleCollapse,

@@ -1,17 +1,5 @@
 import React, { useState } from 'react';
-import { IDotFunctionProps } from './Dot';
-
-export enum EEngine {
-   google,
-   duck,
-   bing,
-   youtube,
-   wiki,
-}
-
-export interface ISearchProps extends IDotFunctionProps {
-   engine: EEngine;
-}
+import { EDotVarient, IDotFunctionProps } from './Dot';
 
 const PLACEHOLDERS = {
    generic: 'What are we searching?',
@@ -20,13 +8,18 @@ const PLACEHOLDERS = {
    research: 'What are we researching?',
 };
 
-function SearchDot({ engine }: ISearchProps): React.ReactElement {
+function SearchDot({
+   varient,
+   onCollapse,
+   onBlock,
+}: IDotFunctionProps): React.ReactElement {
    const [searchQuery, setSearchQuery] = useState('');
+
    function getPlaceholder(): string {
-      switch (engine) {
-         case EEngine.youtube:
+      switch (varient) {
+         case EDotVarient.YouTube:
             return PLACEHOLDERS.video;
-         case EEngine.wiki:
+         case EDotVarient.Wiki:
             return PLACEHOLDERS.research;
          default:
             return PLACEHOLDERS.generic;
@@ -34,17 +27,19 @@ function SearchDot({ engine }: ISearchProps): React.ReactElement {
    }
 
    function getUrl(): string {
-      switch (engine) {
-         case EEngine.google:
+      switch (varient) {
+         case EDotVarient.Google:
             return 'https://www.google.com/search?q=';
-         case EEngine.duck:
+         case EDotVarient.Duck:
             return 'https://duckduckgo.com/?q=';
-         case EEngine.bing:
+         case EDotVarient.Bing:
             return 'https://www.bing.com/search?q=';
-         case EEngine.youtube:
+         case EDotVarient.YouTube:
             return 'https://www.youtube.com/results?search_query=';
-         case EEngine.wiki:
+         case EDotVarient.Wiki:
             return 'https://en.wikipedia.org/w/index.php?search=';
+         default:
+            throw new Error(`Invalid search varient '${varient}'`);
       }
    }
 
@@ -53,6 +48,7 @@ function SearchDot({ engine }: ISearchProps): React.ReactElement {
 
       if (searchQuery) {
          open(getUrl() + searchQuery);
+         onCollapse();
          setSearchQuery('');
       }
    }
@@ -65,6 +61,8 @@ function SearchDot({ engine }: ISearchProps): React.ReactElement {
             placeholder={getPlaceholder()}
             value={searchQuery}
             onChange={(event) => setSearchQuery(event.currentTarget.value)}
+            onFocus={onBlock}
+            onBlur={onBlock}
          />
          <input type="submit" hidden={true} />
       </form>

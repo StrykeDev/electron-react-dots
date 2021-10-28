@@ -1,15 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { IDotFunctionProps } from './Dot';
-
-export enum EFunctions {
-   alarm,
-   shutdown,
-   all,
-}
-
-export interface ITimerProps extends IDotFunctionProps {
-   type: EFunctions;
-}
+import { IDotFunctionProps, EDotVarient } from './Dot';
 
 const OPTIONS = {
    alarm: [{ name: 'Alarm', action: 'alarm' }],
@@ -29,7 +19,10 @@ const OPTIONS = {
    ],
 };
 
-function TimerDot({ type }: ITimerProps): React.ReactElement {
+function TimerDot({
+   varient,
+   onExtend,
+}: IDotFunctionProps): React.ReactElement {
    const [hour, setHour] = useState(0);
    const [min, setMin] = useState(0);
    const [sec, setSec] = useState(15);
@@ -37,12 +30,12 @@ function TimerDot({ type }: ITimerProps): React.ReactElement {
    const [isCounting, setIsCounting] = useState(false);
 
    function getOptions(): { name: string; action: string }[] {
-      switch (type) {
-         case EFunctions.alarm:
+      switch (varient) {
+         case EDotVarient.Alarm:
             return OPTIONS.alarm;
-         case EFunctions.shutdown:
+         case EDotVarient.Shutdown:
             return OPTIONS.shutdown;
-         case EFunctions.all:
+         default:
             return [...OPTIONS.alarm, ...OPTIONS.shutdown];
       }
    }
@@ -79,6 +72,7 @@ function TimerDot({ type }: ITimerProps): React.ReactElement {
       } else {
          if (hour === 0 && min === 0) {
             doAction();
+            onExtend();
          } else if (min > 0) {
             setMin((min) => min - 1);
             setSec(59);

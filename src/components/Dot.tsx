@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
-import SearchDot, { EEngine } from './SearchDot';
-import TimerDot, { EFunctions } from './TimerDot';
+import SearchDot from './SearchDot';
+import TimerDot from './TimerDot';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import {
    faClock,
    faDotCircle,
+   faPowerOff,
    faSearch,
+   faBell,
 } from '@fortawesome/free-solid-svg-icons';
+import {
+   faGoogle,
+   faWikipediaW,
+   faYoutube,
+} from '@fortawesome/free-brands-svg-icons';
 
 export enum EDotType {
    Dot,
@@ -22,15 +29,27 @@ export enum EDotSize {
    Full,
 }
 
+export enum EDotVarient {
+   Google,
+   Duck,
+   Bing,
+   YouTube,
+   Wiki,
+   Shutdown,
+   Alarm,
+}
+
 export interface IDotFunctionProps {
-   onExtend?: () => void;
-   onCollapse?: () => void;
-   onBlock?: () => void;
+   varient?: EDotVarient;
+   onExtend: () => void;
+   onCollapse: () => void;
+   onBlock: () => void;
 }
 
 interface IDotProps {
    id: string;
    type: EDotType;
+   varient?: EDotVarient;
    extended?: boolean;
    onExtend: (id: string) => void;
    onCollapse: (id: string) => void;
@@ -40,6 +59,7 @@ interface IDotProps {
 function Dot({
    id,
    type,
+   varient,
    extended,
    onExtend,
    onCollapse,
@@ -75,37 +95,44 @@ function Dot({
    }
 
    function getIcon(): IconProp {
-      switch (dotType) {
-         case EDotType.Dot:
-            return faDotCircle;
-         case EDotType.Search:
-            return faSearch;
-         case EDotType.Timer:
-            return faClock;
+      switch (varient) {
+         case EDotVarient.Google:
+            return faGoogle;
+         case EDotVarient.YouTube:
+            return faYoutube;
+         case EDotVarient.Wiki:
+            return faWikipediaW;
+         case EDotVarient.Shutdown:
+            return faPowerOff;
+         case EDotVarient.Alarm:
+            return faBell;
+         default:
+            switch (type) {
+               case EDotType.Search:
+                  return faSearch;
+               case EDotType.Timer:
+                  return faClock;
+               default:
+                  return faDotCircle;
+            }
       }
    }
 
    function getComponent(): React.ReactElement {
+      const props = {
+         varient: varient,
+         onExtend: extend,
+         onCollapse: collapse,
+         onBlock: block,
+      };
+
       switch (type) {
-         case EDotType.Dot:
-            return <></>;
-         default:
          case EDotType.Search:
-            return (
-               <SearchDot
-                  engine={EEngine.google}
-                  onCollapse={collapse}
-                  onBlock={block}
-               />
-            );
+            return React.createElement(SearchDot, props);
          case EDotType.Timer:
-            return (
-               <TimerDot
-                  type={EFunctions.all}
-                  onExtend={extend}
-                  onBlock={block}
-               />
-            );
+            return React.createElement(TimerDot, props);
+         default:
+            return <></>;
       }
    }
 
