@@ -73,7 +73,7 @@ h6 {
 }
 
 .text-center {
-   text-align: center;
+   text-align: center !important;
 }
 
 /* Inputs */
@@ -136,6 +136,7 @@ fieldset {
    flex-direction: row;
    align-items: center;
    justify-content: space-between;
+   width: 100%;
    margin: 0;
    padding: 0;
    border: none;
@@ -145,11 +146,6 @@ fieldset {
 
 fieldset:disabled {
    color: var(--text-dark);
-}
-
-fieldset * {
-   flex-grow: 1;
-   text-align: center;
 }
 
 input {
@@ -172,8 +168,6 @@ input::-webkit-inner-spin-button {
 
 select {
    width: 100%;
-   min-width: 1.5em;
-   max-width: 10em;
    min-height: 1.5em;
    margin: 0.25em;
    padding: 0.25em;
@@ -196,7 +190,7 @@ select {
 }
 
 .unstyled-list {
-   list-style: none;
+   list-style: none !important;
 }
 
 /* .text-shadow {
@@ -208,9 +202,9 @@ select {
 } */
 
 .color-accent {
-   color: var(--accent-color);
+   color: var(--accent-color) !important;
 }
 
 .background-accent {
-   background-color: var(--accent-color);
+   background-color: var(--accent-color) !important;
 }
