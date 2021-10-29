@@ -1,65 +1,73 @@
 import React, { useState } from 'react';
-import Dot, { EDotType, EDotVarient } from '../Dot';
+import EmptyDot from './components/EmptyDot';
+import SearchDot, { EEngine } from './components/SearchDot';
+import TimerDot, { EType } from './components/TimerDot';
 import './Dots.css';
 
 function Dots(): React.ReactElement {
    const [dots] = useState([
       {
-         type: EDotType.Search,
-         varient: EDotVarient.Google,
+         component: EmptyDot,
+         props: {},
       },
       {
-         type: EDotType.Dot,
+         component: SearchDot,
+         props: { engine: EEngine.Google },
       },
       {
-         type: EDotType.Dot,
+         component: SearchDot,
+         props: { engine: EEngine.YouTube },
       },
       {
-         type: EDotType.Timer,
+         component: TimerDot,
+         props: { type: EType.Power },
       },
    ]);
-   const [extendedDot, setExtendedDot] = useState<string>();
+   const [extendedDot, setExtendedDot] = useState('');
    const [canExtend, setCanExtend] = useState(true);
 
-   function handleExtend(id: string): void {
+   function handleExtend(key: string): void {
       if (canExtend) {
-         setExtendedDot(id);
+         setExtendedDot(key);
       }
    }
 
-   function handleCollapse(id: string): void {
+   function handleCollapse(key: string): void {
       if (canExtend) {
-         setExtendedDot(undefined);
-      } else if (!canExtend && extendedDot == id) {
-         setExtendedDot(undefined);
+         setExtendedDot('');
+      } else if (!canExtend && extendedDot == key) {
+         setExtendedDot('');
          setCanExtend(true);
       }
    }
 
-   function handleBlock(id: string): void {
+   function handleBlock(key: string): void {
       if (canExtend) {
-         setExtendedDot(id);
+         setExtendedDot(key);
          setCanExtend(false);
-      } else if (id == extendedDot) {
+      } else if (key == extendedDot) {
          setCanExtend(true);
       }
+   }
+
+   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   function createDot(dot: any, key: string): React.ReactElement {
+      const props = {
+         key: key,
+         extended: key === extendedDot,
+         onExtend: () => handleExtend(key),
+         onCollapse: () => handleCollapse(key),
+         onBlock: () => handleBlock(key),
+         ...dot.props,
+      };
+
+      return React.createElement(dot.component, props);
    }
 
    return (
       <div className="dots">
          {dots.map((dot, i) => {
-            const key = 'dot-' + i;
-            const props = {
-               key: key,
-               id: key,
-               type: dot.type,
-               varient: dot.varient,
-               extended: key === extendedDot,
-               onExtend: handleExtend,
-               onCollapse: handleCollapse,
-               onBlock: handleBlock,
-            };
-            return React.createElement(Dot, props);
+            return createDot(dot, `dot-${i}`);
          })}
       </div>
    );
