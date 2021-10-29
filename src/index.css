@@ -112,8 +112,8 @@ fieldset:disabled {
    color: var(--text-dark);
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
    margin: 0;
    appearance: none;
 }
@@ -127,12 +127,6 @@ select {
    background-color: transparent;
    text-overflow: ellipsis;
    cursor: pointer;
-}
-
-input:disabled,
-select:disabled {
-   color: var(--text-dark);
-   cursor: auto;
 }
 
 option {
