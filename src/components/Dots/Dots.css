@@ -1,8 +1,12 @@
-.dots {
-   --dot-max-size: 25em;
+:root {
+   --dot-amount: 4;
+   --dot-max-size: 400px;
    --dot-size: 2.5em;
+}
 
-   display: flex;
+.dots-container {
+   display: grid;
+   grid-template-columns: repeat(var(--dot-amount), var(--dot-size));
    align-items: flex-end;
    justify-content: space-between;
    width: var(--dot-max-size);
@@ -10,22 +14,19 @@
    transition: opacity var(--transition-quick);
 }
 
-.dots:hover,
-.dots:focus {
+.dots-container:hover,
+.dots-container:focus {
    opacity: 100%;
 }
 
 .dot {
-   display: flex;
-   flex-grow: 1;
-   flex-wrap: nowrap;
-   align-items: center;
+   display: grid;
+   grid-template-columns: var(--dot-size) 1fr;
    overflow: hidden;
    min-width: var(--dot-size);
    max-width: var(--dot-size);
    min-height: var(--dot-size);
    max-height: var(--dot-size);
-   margin: 0.1em;
    border-radius: calc(var(--dot-size) / 2);
    background-color: var(--bg-normal);
    transition: max-width var(--transition-normal),
@@ -36,16 +37,11 @@
    display: flex;
    align-items: center;
    justify-content: center;
-   width: var(--dot-size);
-   min-width: var(--dot-size);
-   height: var(--dot-size);
-   min-height: var(--dot-size);
    color: #ffffff;
 }
 
 .dot .dot-content {
    display: flex;
-   flex-grow: 1;
    flex-direction: row;
    align-items: center;
    justify-content: center;
@@ -59,17 +55,15 @@
    background-color: var(--bg-dark);
 }
 
+.dot.extended {
+   z-index: 10;
+   grid-area: 1 / 1 / 1 / calc(var(--dot-amount) + 1);
+   margin-bottom: calc(var(--dot-size) * -1);
+}
+
+/* Wide dots */
 .dot.wide .dot-content {
    max-height: var(--dot-size);
-}
-
-.dot.tall .dot-content {
-   max-width: var(--dot-size);
-}
-
-.dot.tall,
-.dot.full {
-   flex-direction: column-reverse;
 }
 
 .dot.wide.extended,
@@ -77,7 +71,23 @@
    max-width: 100%;
 }
 
+/* Tall \ Full dots */
+.dot.tall,
+.dot.full {
+   grid-template-rows: var(--dot-size) 1fr;
+   grid-template-columns: unset;
+}
+
+.dot.tall .dot-content {
+   max-width: var(--dot-size);
+}
+
+.dot.tall .dot-content,
+.dot.fall .dot-content {
+   overflow-y: auto;
+}
+
 .dot.tall.extended,
 .dot.full.extended {
-   max-height: var(--dot-max-size);
+   max-height: calc(var(--dot-max-size) * 1.5);
 }

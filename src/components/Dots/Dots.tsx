@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import EmptyDot from './components/EmptyDot';
 import SearchDot, { EEngine } from './components/SearchDot';
 import TimerDot, { EType } from './components/TimerDot';
@@ -7,16 +7,16 @@ import './Dots.css';
 function Dots(): React.ReactElement {
    const [dots] = useState([
       {
-         component: EmptyDot,
-         props: {},
-      },
-      {
          component: SearchDot,
          props: { engine: EEngine.Google },
       },
       {
-         component: SearchDot,
-         props: { engine: EEngine.YouTube },
+         component: EmptyDot,
+         props: {},
+      },
+      {
+         component: EmptyDot,
+         props: {},
       },
       {
          component: TimerDot,
@@ -25,6 +25,11 @@ function Dots(): React.ReactElement {
    ]);
    const [extendedDot, setExtendedDot] = useState('');
    const [canExtend, setCanExtend] = useState(true);
+
+   useEffect(() => {
+      const root = document.documentElement;
+      root.style.setProperty('--dot-amount', dots.length.toString());
+   }, [dots]);
 
    function handleExtend(key: string): void {
       if (canExtend) {
@@ -65,7 +70,7 @@ function Dots(): React.ReactElement {
    }
 
    return (
-      <div className="dots">
+      <div className="dots-container">
          {dots.map((dot, i) => {
             return createDot(dot, `dot-${i}`);
          })}
