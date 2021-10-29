@@ -52,11 +52,30 @@ function TimerDot({
       setIsCounting(false);
    }
 
-   function startStopTimer(event: React.FormEvent): void {
-      event.preventDefault();
+   function startStopTimer(event: React.FormEvent | undefined): void {
+      if (event) {
+         event.preventDefault();
+         if (!isCounting && action && (sec || min || hour)) {
+            setIsCounting(true);
+         }
+      } else if (isCounting) {
+         setIsCounting(false);
+      }
+   }
 
-      if (!isCounting && action && (sec || min || hour)) {
-         setIsCounting(true);
+   let held = false;
+   function holdToStop(isDown: boolean): void {
+      if (isCounting) {
+         if (isDown) {
+            held = true;
+            setTimeout(() => {
+               if (held) {
+                  startStopTimer(undefined);
+               }
+            }, 1000);
+         } else {
+            held = false;
+         }
       }
    }
 
@@ -92,7 +111,8 @@ function TimerDot({
 
    return (
       <form
-         onClick={() => setIsCounting(false)}
+         onMouseDown={() => holdToStop(true)}
+         onMouseUp={() => holdToStop(false)}
          onSubmit={(event) => startStopTimer(event)}
       >
          <fieldset disabled={isCounting}>
