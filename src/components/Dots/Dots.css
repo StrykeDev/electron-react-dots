@@ -1,6 +1,6 @@
 .dots {
    --dot-max-size: 25em;
-   --dot-size: 3em;
+   --dot-size: 2.5em;
 
    display: flex;
    align-items: flex-end;
@@ -28,8 +28,7 @@
    margin: 0.1em;
    border-radius: calc(var(--dot-size) / 2);
    background-color: var(--bg-normal);
-   transition:
- max-width var(--transition-normal),
+   transition: max-width var(--transition-normal),
       max-height var(--transition-normal);
 }
 

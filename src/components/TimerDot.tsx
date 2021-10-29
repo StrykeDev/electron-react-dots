@@ -84,6 +84,11 @@ function TimerDot({
       }
    }, [isCounting, sec]);
 
+   const timerStyle: React.CSSProperties = {
+      width: '2em',
+      textAlign: 'center',
+   };
+
    return (
       <form
          onClick={() => setIsCounting(false)}
@@ -91,6 +96,7 @@ function TimerDot({
       >
          <fieldset disabled={isCounting}>
             <input
+               style={timerStyle}
                type="number"
                min={0}
                max={99}
@@ -100,6 +106,7 @@ function TimerDot({
             />
             :
             <input
+               style={timerStyle}
                type="number"
                min={0}
                max={60}
@@ -109,6 +116,7 @@ function TimerDot({
             />
             :
             <input
+               style={timerStyle}
                type="number"
                width={1000}
                min={0}
