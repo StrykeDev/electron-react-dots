@@ -40,6 +40,8 @@ function Dots(): React.ReactElement {
       if (canExtend) {
          setExtendedDot(id);
          setCanExtend(false);
+      } else if (id == extendedDot) {
+         setCanExtend(true);
       }
    }
 
