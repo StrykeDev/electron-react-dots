@@ -45,7 +45,15 @@ function Dot({
    }
 
    return (
-      <div className={['dot', getSize(), extended ? 'extended' : ''].join(' ')}>
+      <div
+         className={['dot', getSize(), extended ? 'extended' : ''].join(' ')}
+         onMouseEnter={() => {
+            open('click:enable');
+         }}
+         onMouseLeave={() => {
+            open('click:disable');
+         }}
+      >
          <div
             className="dot-btn"
             onClick={() => (extended ? onCollapse() : onExtend())}

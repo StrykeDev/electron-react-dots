@@ -57,6 +57,14 @@ app.whenReady().then(() => {
       const [type, action] = url.split(':');
 
       switch (type) {
+         case 'click':
+            if (action === 'enable') {
+               mainWindow.setIgnoreMouseEvents(false,);
+            } else {
+               mainWindow.setIgnoreMouseEvents(true, { forward: true });
+            }
+            break;
+
          case 'action':
             switch (action) {
                case 'shutdown':
