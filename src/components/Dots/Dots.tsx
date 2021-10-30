@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import EmptyDot from './components/EmptyDot';
+import PetDot from './components/PetDot/PetDot';
 import SearchDot, { EEngine } from './components/SearchDot';
 import TimerDot, { EType } from './components/TimerDot';
 import './Dots.css';
@@ -11,12 +12,10 @@ function Dots(): React.ReactElement {
          props: { engine: EEngine.Google },
       },
       {
-         component: EmptyDot,
-         props: {},
+         component: PetDot,
       },
       {
          component: EmptyDot,
-         props: {},
       },
       {
          component: TimerDot,
@@ -27,6 +26,11 @@ function Dots(): React.ReactElement {
    const [canExtend, setCanExtend] = useState(true);
 
    useEffect(() => {
+      if (dots.length > 6 || dots.length < 3) {
+         throw new Error(
+            `${dots.length} is invalid dots amount, min = 3, max = 6.`,
+         );
+      }
       const root = document.documentElement;
       root.style.setProperty('--dot-amount', dots.length.toString());
    }, [dots]);
@@ -56,7 +60,8 @@ function Dots(): React.ReactElement {
    }
 
    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-   function createDot(dot: any, key: string): React.ReactElement {
+   function createDot(dot: any, index: number): React.ReactElement {
+      const key = `dot-${index}`;
       const props = {
          key: key,
          extended: key === extendedDot,
@@ -71,8 +76,8 @@ function Dots(): React.ReactElement {
 
    return (
       <div className="dots-container">
-         {dots.map((dot, i) => {
-            return createDot(dot, `dot-${i}`);
+         {dots.map((dot, i): React.ReactElement => {
+            return createDot(dot, i);
          })}
       </div>
    );

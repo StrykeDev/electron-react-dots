@@ -1,16 +1,17 @@
 :root {
    --dot-amount: 4;
-   --dot-max-size: 400px;
    --dot-size: 2.5em;
+   --dot-inactive-opacity: 80%;
+   --dot-spacing: calc((100% / (var(--dot-amount) - 1)));
 }
 
 .dots-container {
-   display: grid;
-   grid-template-columns: repeat(var(--dot-amount), var(--dot-size));
+   position: relative;
+   display: flex;
    align-items: flex-end;
-   justify-content: space-between;
-   width: var(--dot-max-size);
-   opacity: 80%;
+   width: 100%;
+   height: 100%;
+   opacity: var(--dot-inactive-opacity);
    transition: opacity var(--transition-quick);
 }
 
@@ -20,17 +21,59 @@
 }
 
 .dot {
+   position: absolute;
+   z-index: 0;
    display: grid;
    grid-template-columns: var(--dot-size) 1fr;
    overflow: hidden;
-   min-width: var(--dot-size);
-   max-width: var(--dot-size);
-   min-height: var(--dot-size);
-   max-height: var(--dot-size);
+   width: var(--dot-size);
+   height: var(--dot-size);
    border-radius: calc(var(--dot-size) / 2);
    background-color: var(--bg-normal);
-   transition: max-width var(--transition-normal),
-      max-height var(--transition-normal);
+   transition: left var(--transition-normal), width var(--transition-normal),
+      height var(--transition-normal), z-index var(--transition-normal);
+}
+
+.dot:nth-child(2) {
+   left: calc(
+      var(--dot-spacing) * 1 - var(--dot-size) * (1 / (var(--dot-amount) - 1))
+   );
+}
+
+.dot:nth-child(3) {
+   left: calc(
+      var(--dot-spacing) * 2 - var(--dot-size) * (2 / (var(--dot-amount) - 1))
+   );
+}
+
+.dot:nth-child(4) {
+   left: calc(
+      var(--dot-spacing) * 3 - var(--dot-size) * (3 / (var(--dot-amount) - 1))
+   );
+}
+
+.dot:nth-child(5) {
+   left: calc(
+      var(--dot-spacing) * 4 - var(--dot-size) * (4 / (var(--dot-amount) - 1))
+   );
+}
+
+.dot:nth-child(6) {
+   left: calc(
+      var(--dot-spacing) * 5 - var(--dot-size) * (5 / (var(--dot-amount) - 1))
+   );
+}
+
+.dot:nth-child(7) {
+   left: calc(
+      var(--dot-spacing) * 6 - var(--dot-size) * (6 / (var(--dot-amount) - 1))
+   );
+}
+
+.dot:nth-child(8) {
+   left: calc(
+      var(--dot-spacing) * 7 - var(--dot-size) * (7 / (var(--dot-amount) - 1))
+   );
 }
 
 .dot .dot-btn {
@@ -42,7 +85,6 @@
 
 .dot .dot-content {
    display: flex;
-   flex-direction: row;
    align-items: center;
    justify-content: center;
    overflow: hidden;
@@ -56,19 +98,15 @@
 }
 
 .dot.extended {
+   right: 0;
+   left: 0;
    z-index: 10;
-   grid-area: 1 / 1 / 1 / calc(var(--dot-amount) + 1);
-   margin-bottom: calc(var(--dot-size) * -1);
+   width: 100%;
 }
 
 /* Wide dots */
 .dot.wide .dot-content {
    max-height: var(--dot-size);
-}
-
-.dot.wide.extended,
-.dot.full.extended {
-   max-width: 100%;
 }
 
 /* Tall \ Full dots */
@@ -83,11 +121,17 @@
 }
 
 .dot.tall .dot-content,
-.dot.fall .dot-content {
+.dot.full .dot-content {
    overflow-y: auto;
 }
 
 .dot.tall.extended,
 .dot.full.extended {
-   max-height: calc(var(--dot-max-size) * 1.5);
+   grid-template-rows: 1fr var(--dot-size);
+   height: 100%;
+}
+
+.dot.tall.extended .dot-btn,
+.dot.full.extended .dot-btn {
+   order: 1;
 }

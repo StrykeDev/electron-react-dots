@@ -130,7 +130,6 @@ function TimerDot({
    const timerStyle: React.CSSProperties = {
       width: '2em',
       textAlign: 'center',
-      padding: 0,
    };
 
    return (

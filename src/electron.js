@@ -4,7 +4,7 @@ const isDev = require('electron-is-dev');
 const path = require('path');
 const { shutdown, reboot, hibernate } = require('electron-shutdown-command');
 
-const APP_WIDTH = 400;
+const APP_WIDTH = 320;
 const APP_HEIGHT = 600;
 const APP_PADDING = 100;
 
