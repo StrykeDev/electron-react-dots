@@ -32,6 +32,17 @@
    background-color: var(--bg-normal);
    transition: left var(--transition-normal), width var(--transition-normal),
       height var(--transition-normal), z-index var(--transition-normal);
+   animation: dot-spawn 1s ease 0s forwards;
+}
+
+@keyframes dot-spawn {
+   0% {
+      opacity: 0;
+   }
+
+   100% {
+      opacity: 1;
+   }
 }
 
 .dot:nth-child(2) {
