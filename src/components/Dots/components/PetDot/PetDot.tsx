@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Dot, { EDotSize, IDots } from '../../Dot';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -20,18 +20,26 @@ import {
    faKissWinkHeart,
    faLaughBeam,
    faLemon,
+   faPaw,
    faPizzaSlice,
    faPoop,
    faPrescriptionBottleAlt,
    faShower,
+   faStar,
    faTint,
    faToiletPaper,
    faUtensils,
 } from '@fortawesome/free-solid-svg-icons';
-import egg from './assets/egg.gif';
+
+import egg0 from './assets/egg-static.gif';
+import egg1 from './assets/egg.gif';
+import egg2 from './assets/egg-cracking.gif';
 import './PetDot.css';
 
 function PetDot({ extended, onExtend, onCollapse }: IDots): React.ReactElement {
+   const [pet, setPet] = useState(egg0);
+   const [level, setLevel] = useState(0);
+   const [exp, setExp] = useState(0);
    const [health] = useState(1);
    const [energy] = useState(1);
    const [love] = useState(1);
@@ -43,6 +51,27 @@ function PetDot({ extended, onExtend, onCollapse }: IDots): React.ReactElement {
       return Math.ceil(float * 100) + '%';
    }
 
+   useEffect(() => {
+      setTimeout(() => {
+         setExp(exp + 1);
+      }, 10000);
+
+      if (exp % 100 === 99) {
+         setLevel(level + 1);
+      }
+   }, [exp]);
+
+   useEffect(() => {
+      switch (level) {
+         case 1:
+            setPet(egg1);
+            break;
+         case 2:
+            setPet(egg2);
+            break;
+      }
+   }, [level]);
+
    return (
       <Dot
          icon={faEgg}
@@ -53,6 +82,17 @@ function PetDot({ extended, onExtend, onCollapse }: IDots): React.ReactElement {
       >
          <div className="pet-container">
             <div className="score">
+               <div>
+                  <FontAwesomeIcon icon={faPaw} />
+                  <span>{level}</span>
+               </div>
+               <div>
+                  <span></span>
+               </div>
+               <div>
+                  <FontAwesomeIcon icon={faStar} />
+                  <span>{exp % 100}</span>
+               </div>
                <div>
                   <FontAwesomeIcon icon={faHeartbeat} />
                   <span>{getPrecentage(health)}</span>
@@ -83,7 +123,7 @@ function PetDot({ extended, onExtend, onCollapse }: IDots): React.ReactElement {
 
             {/* PREVIEW ONLY */}
             <div className="pet">
-               <img src={egg} />
+               <img src={pet} />
             </div>
 
             <div className="controls">
