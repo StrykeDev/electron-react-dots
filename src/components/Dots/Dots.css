@@ -80,7 +80,7 @@
    display: flex;
    align-items: center;
    justify-content: center;
-   color: #ffffff;
+   color: var(--text-light);
 }
 
 .dot .dot-content {

@@ -4,7 +4,7 @@ import './App.css';
 
 function App(): React.ReactElement {
    return (
-      <div id="app" className="app">
+      <div id="app" className="app" tabIndex={1}>
          <Dots />
       </div>
    );
