@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import EmptyDot from './components/EmptyDot';
 import PetDot from './components/PetDot/PetDot';
 import SearchDot, { EEngine } from './components/SearchDot';
+import ShortcutDot from './components/ShortcutDot';
 import TimerDot, { EType } from './components/TimerDot';
 import './Dots.css';
 
@@ -15,7 +16,7 @@ function Dots(): React.ReactElement {
          component: PetDot,
       },
       {
-         component: EmptyDot,
+         component: ShortcutDot,
       },
       {
          component: TimerDot,

@@ -248,4 +248,5 @@ button,
 
 .unstyled-list {
    list-style: none !important;
+   padding-inline-start: unset;
 }
